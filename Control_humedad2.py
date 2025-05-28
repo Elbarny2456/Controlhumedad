@@ -1,11 +1,11 @@
-import Adafruit_DHT
+mport adafruit_dht
+import board
 import tkinter as tk
 from tkinter import Label
 import time
 
 # Configuración del sensor
-DHT_SENSOR = Adafruit_DHT.DHT22
-DHT_PIN = 4  # Cambia el número de GPIO según tu conexión
+DHT_SENSOR = adafruit_dht.DHT22(board.D4)  # Cambia "D4" según el GPIO que uses
 
 # Crear ventana
 root = tk.Tk()
@@ -18,11 +18,14 @@ label_temp.pack(pady=20)
 
 def actualizar_temperatura():
     """Función que actualiza la temperatura cada 2 segundos"""
-    humedad, temperatura = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-    if temperatura is not None:
-        label_temp.config(text=f" Temperatura: {temperatura:.2f}°C")
-    else:
-        label_temp.config(text="Error al leer el sensor")
+    try:
+        temperatura = DHT_SENSOR.temperature
+        if temperatura is not None:
+            label_temp.config(text=f"Temperatura: {temperatura:.2f}°C")
+        else:
+            label_temp.config(text="Error al leer el sensor")
+    except RuntimeError as error:
+        label_temp.config(text="Error de lectura, intentando nuevamente...")
 
     root.after(2000, actualizar_temperatura)  # Ejecutar nuevamente en 2 seg
 
