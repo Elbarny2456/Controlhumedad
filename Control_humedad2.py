@@ -1,4 +1,4 @@
-mport adafruit_dht
+import adafruit_dht
 import board
 import tkinter as tk
 from tkinter import Label
