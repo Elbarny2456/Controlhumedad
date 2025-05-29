@@ -9,7 +9,7 @@ DHT_SENSOR = adafruit_dht.DHT22(board.D4)  # Cambia "D4" según el GPIO que uses
 
 # Crear ventana
 root = tk.Tk()
-root.title("Temperatura y Humedad por ELBARNY")
+root.title("Temperatura y Humedad por ELBARNY😎")
 root.geometry("300x250")
 
 # Etiquetas para mostrar información
